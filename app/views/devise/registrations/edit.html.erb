@@ -3,6 +3,17 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
+  <div class="circle-avatar">
+    <% if current_user.persisted? && current_user.avatar? %>
+        <%= image_tag current_user.avatar.to_s %>
+        <label><%= f.check_box :remove_avatar %> 画像を削除</label>
+    <% else %>
+        <%= image_tag current_user.avatar.to_s %>
+        <%= f.hidden_field :avatar_cache %>
+    <% end %>
+        <%= f.file_field :avatar %>
+  </div>
+
   <div class ="fied">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true %>
