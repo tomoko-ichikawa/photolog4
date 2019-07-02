@@ -1,6 +1,10 @@
-<h1>マイページ</h1>
+<h1>ユーザー詳細</h1>
+<% @users.each do |user| %>
+  <p><%= image_tag user.avatar.to_s %></p>
+<% end %>
   <p>name : <%= @user.name %></p>
   <p>profile: <%= @user.profile %>
+
 <hr>
 
 <% @photos.each do |photo| %>
