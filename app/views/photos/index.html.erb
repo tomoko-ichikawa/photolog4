@@ -7,18 +7,17 @@
     <tr>
       <th>Image</th>
       <th>Caption</th>
-      <th>User</th>
+      <th>Name</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @photos.each do |photo| %>
-
       <tr>
         <td><%= image_tag photo.image.to_s %></td>
         <td><%= photo.caption %></td>
-        <td><%= photo.user_id %></td>
+        <td><%= photo.user.name %></td>
         <td><%= link_to 'Show', photo %></td>
         <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
         <td><%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>

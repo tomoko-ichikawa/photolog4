@@ -1,7 +1,9 @@
 <h1>確認画面</h1>
-<%= form_with(model: @photo, local: true ,url: photos_path) do |form| %>
+<%= form_with(model: @photo, url: photos_path, local: true) do |form| %>
   <%= image_tag(@photo.image.url) if @photo.image && @photo.image.url %>
+  <p>caption:<%= @photo.caption %></p>
   <%= form.hidden_field :image_cache %>
+  <%= form.hidden_field :caption %>
   <%= form.submit "投稿する" %>
 <% end %>
 

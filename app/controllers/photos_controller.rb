@@ -1,5 +1,6 @@
 class PhotosController < ApplicationController
   before_action :authenticate_user!, except: [:index]
+  before_action :set_photo, only: [:show, :edit, :update, :destroy]
 
   # GET /photos
   # GET /photos.json
@@ -10,17 +11,22 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
-    @photo = Photo.find(params[:id])
-    @user = @photo.user
+     @user = @photo.user
   end
 
   # GET /photos/new
   def new
-    @photo = Photo.new
+      if params[:back]
+          @photo = Photo.new(photo_params)
+      else
+          @photo = current_user.photos.build
+          @user = @photo.user
+      end
   end
-
+  
   # GET /photos/1/edit
   def edit
+      @user = @photo.user
   end
 
   # POST /photos
@@ -57,15 +63,18 @@ class PhotosController < ApplicationController
   # DELETE /photos/1
   # DELETE /photos/1.json
   def destroy
-    @photo.destroy
-    respond_to do |format|
-      format.html { redirect_to photos_url, notice: 'Photo was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+      @user = @photo.user
+      @photo.destroy
+      respond_to do |format|
+          format.html { redirect_to photos_url, notice: 'Photo was successfully destroyed.' }
+          format.json { head :no_content }
+      end
   end
   
   def confirm
-    @photo = Photo.new(photo_params)
+      @photo = current_user.photos.build(photo_params)
+      @user = @photo.user
+      render :new if @photo.invalid?
   end
 
   private
@@ -76,6 +85,6 @@ class PhotosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_params
-      params.require(:photo).permit(:image, :caption, :user_id)
+      params.require(:photo).permit(:image, :image_cache, :caption)
     end
 end

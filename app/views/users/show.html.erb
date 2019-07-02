@@ -1,8 +1,10 @@
-<h1>ユーザー詳細</h1>
+<h1>マイページ</h1>
+  <p>name : <%= @user.name %></p>
 <hr>
 
 <% @photos.each do |photo| %>
   <hr>
+  <p><%= image_tag photo.image.to_s %></p>
   <p><span>emai: </span><%= @user.email %></p>
   <p><span>投稿内容: </span><%=link_to photo.caption, photo_path(photo.id) %></p>
 <% end %>
