@@ -1,10 +1,9 @@
 <h1>ユーザー詳細</h1>
-<% @users.each do |user| %>
-  <p><%= image_tag user.avatar.to_s %></p>
-<% end %>
+<div class="circle-avatar">
+  <p><%= image_tag @user.avatar.to_s %></p>
   <p>name : <%= @user.name %></p>
   <p>profile: <%= @user.profile %>
-
+</div>
 <hr>
 
 <% @photos.each do |photo| %>

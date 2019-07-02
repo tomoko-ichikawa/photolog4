@@ -82,3 +82,10 @@ div {
 label {
   display: block;
 }
+
+.circle-avatar img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
