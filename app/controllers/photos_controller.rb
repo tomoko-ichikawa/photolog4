@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_action :set_photo, only: [:show, :edit, :update, :destroy, :ensure_correct_user]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   # GET /photos
@@ -75,14 +75,6 @@ class PhotosController < ApplicationController
       render :new if @photo.invalid?
   end
   
-  def ensure_correct_user
-      @photo = Photo.find(params[:id])
-      if current_user.id != @photo.user_id
-          flash[:notice] = "権限がありません"
-          redirect_to photos_path
-      end
-  end
-  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_photo
@@ -92,5 +84,13 @@ class PhotosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_params
       params.require(:photo).permit(:image, :image_cache, :caption)
+    end
+    
+    def ensure_correct_user
+        @photo = Photo.find(params[:id])
+        if current_user.id != @photo.user_id
+            flash[:notice] = "権限がありません"
+            redirect_to photos_path
+        end
     end
 end
