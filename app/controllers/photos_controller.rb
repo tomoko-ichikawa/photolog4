@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   # GET /photos
   # GET /photos.json
@@ -49,15 +50,12 @@ class PhotosController < ApplicationController
   # PATCH/PUT /photos/1
   # PATCH/PUT /photos/1.json
   def update
-    respond_to do |format|
+      @user = @photo.user
       if @photo.update(photo_params)
-        format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
-        format.json { render :show, status: :ok, location: @photo }
+          redirect_to "/users/#{@user.id}",notice:"編集しました！"
       else
-        format.html { render :edit }
-        format.json { render json: @photo.errors, status: :unprocessable_entity }
+          render 'edit'
       end
-    end
   end
 
   # DELETE /photos/1
@@ -76,7 +74,15 @@ class PhotosController < ApplicationController
       @user = @photo.user
       render :new if @photo.invalid?
   end
-
+  
+  def ensure_correct_user
+      @photo = Photo.find(params[:id])
+      if current_user.id != @photo.user_id
+          flash[:notice] = "権限がありません"
+          redirect_to photos_path
+      end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_photo
