@@ -46,6 +46,10 @@ gem 'mini_magick'
 gem 'devise'
 
 group :development do
+  gem 'letter_opener_web'
+end
+
+group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
