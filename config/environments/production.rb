@@ -44,7 +44,7 @@ Rails.application.configure do
   # config.action_cable.url = 'wss://example.com/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
   config.action_mailer.raise_delivery_errors= true
-  config.action_mailer.raise_delivery_method = :smtp
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       port: 587,
       address: 'smtp.gmail.com',
