@@ -27,13 +27,13 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery = false
   config.action_mailer.smtp_settings = {
       port: 587,
       address: 'smtp.gmail.com',
       domain:  'smtp.gmail.com',
-      user_name: 'tomoko.ichikawa1112@gmail.com',
-      password:  'xv3V4Ksksi9APB8',
+      user_name: 'tomoko.........@gmail.com',
+      password:  'xv3............8',
       authentication: 'login',
       enable_starttls_auto: true
   }
