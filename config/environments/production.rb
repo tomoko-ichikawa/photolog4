@@ -43,15 +43,15 @@ Rails.application.configure do
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
-  config.action_mailer.raise_delivery_errors= true
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
+  config.action_mailer.default_url_options = { host: 'https://thawing-depths-88417.herokuapp.com/' }
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+      user_name: ENV['SENDGRID_USERNAME'],
+      password: ENV['SENDGRID_PASSWORD'],
+      domain: "heroku.com",
+      address: "smtp.SendGrid.net",
       port: 587,
-      address: 'smtp.gmail.com',
-      domain:  'smtp.gmail.com',
-      user_name: 'tomoko.ichikawa1112@gmail.com',
-      password:  'xv3V4Ksksi9APB8',
-      authentication: 'login',
+      authentication: :plain,
       enable_starttls_auto: true
   }
 
