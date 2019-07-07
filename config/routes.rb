@@ -10,8 +10,8 @@ Rails.application.routes.draw do
             post:confirm
       end
   end
-  resources :users, controller => {
-      registrations => 'users/registrations'
+  resources :users, :controllers => {
+      :registrations => 'users/registrations'
   }
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
