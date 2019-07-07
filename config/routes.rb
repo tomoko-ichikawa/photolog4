@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   }
   
   resources :photos do
-      resources :favorites, only: [:create, :destory]
+      resources :favorites, only: [:create, :destroy]
       collection do
             post:confirm
       end
