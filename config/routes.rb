@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   
   resources :users, only: [:show]
   
-  devise_for :users, controllers: {
-      registrations: 'users/registrations'
+  devise_for :users, :controllers => {
+      :registrations => 'users/registrations',
   }
  
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
