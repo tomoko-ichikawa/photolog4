@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'favorites/create'
+
+  get 'favorites/destroy'
+
   root 'photos#index'
   devise_for :users
   resources :photos do
@@ -6,8 +10,8 @@ Rails.application.routes.draw do
             post:confirm
       end
   end
-  resources :users, controllers: {
-      registrations: 'users/registrations'
+  resources :users, controllers => {
+      registrations => 'users/registrations'
   }
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
