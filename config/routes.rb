@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   root 'photos#index'
   
   resources :users, only: [:show]
-  devise_for :users, controllers: {
-      registrations: 'users/registrations'
+  devise_for :users, :controllers=> {
+      :registrations => 'users/registrations'
   }
   
   resources :photos do
