@@ -10,7 +10,7 @@ Rails.application.routes.draw do
             post:confirm
       end
   end
-  resources :users, :controllers => {
+  devise_for :users, :controllers => {
       :registrations => 'users/registrations'
   }
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
