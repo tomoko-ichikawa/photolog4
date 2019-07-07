@@ -43,6 +43,18 @@ Rails.application.configure do
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
+  
+  config.action_mailer.raise_delivery_errors= true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      port: 587,
+      address: 'smtp.gmail.com',
+      domain:  'smtp.gmail.com',
+      user_name: 'tomoko.........@gmail.com',
+      password:  'xv3............8',
+      authentication: 'login',
+      enable_starttls_auto: true
+  }
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -88,7 +100,5 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  
-  config.action_mailer.default_url_options = {host: 'https://thawing-depths-88417.herokuapp.com/'}
-  config.action_mailer.delivery_method = :letter_opener_web
+ 
 end
