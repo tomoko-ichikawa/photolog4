@@ -4,9 +4,12 @@ Rails.application.routes.draw do
   get 'favorites/destroy'
 
   root 'photos#index'
-  devise_for :users, :controllers => {
-      :registrations => 'users/registrations'
+  
+  resources :users, only: [:show]
+  devise_for :users, controllers: {
+      registrations: 'users/registrations'
   }
+  
   resources :photos do
       collection do
             post:confirm
