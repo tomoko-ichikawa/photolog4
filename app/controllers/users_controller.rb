@@ -9,6 +9,7 @@ class UsersController < ApplicationController
         @users = User.all
         @user = User.find(params[:id])
         @photos = @user.photos
+        @favorite_photos = @user.favorite_photos
     end
     
     def edit

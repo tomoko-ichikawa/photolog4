@@ -1,7 +1,13 @@
 class FavoritesController < ApplicationController
-  def create
-  end
-
-  def destroy
-  end
+    def create
+        favorite = current_user.favorites.build(blog_id: params[:photo_id])
+        favorite.save
+        redirect_to photos_path
+    end
+    
+    def destroy
+        favorite = Favorite.find_by(photo_id: params[:photo_id], user_id: current_user.id)
+        avorite.destroy
+        redirect_to photos_path
+    end
 end

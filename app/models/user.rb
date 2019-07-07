@@ -6,4 +6,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :name, presence: true
   has_many :photos
+  has_many :favorites
+  has_many :favorite_photos, through: :favorites, source: :photo
 end
