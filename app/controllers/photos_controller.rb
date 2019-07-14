@@ -78,20 +78,20 @@ class PhotosController < ApplicationController
   
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_photo
+  def set_photo
       @photo = Photo.find(params[:id])
-    end
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def photo_params
+  def photo_params
       params.require(:photo).permit(:image, :image_cache, :caption)
-    end
+  end
     
-    def ensure_correct_user
+  def ensure_correct_user
         @photo = Photo.find(params[:id])
-        if current_user.id != @photo.user_id
+    if current_user.id != @photo.user_id
             flash[:notice] = "権限がありません"
             redirect_to photos_path
-        end
     end
+ end
 end
