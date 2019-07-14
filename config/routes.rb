@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   root 'photos#index'
+  root 'favorites#index'
   
   devise_for :users, controllers: {
           registrations: 'users/registrations'
   }
   
   resources :photos do
-      resources :favorites, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy, :show]
       collection do
             post:confirm
       end

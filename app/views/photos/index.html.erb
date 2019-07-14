@@ -1,40 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Photos</h1>
+<!-- Blog Entries Column -->
+  <div class="col-md-12">
+　　　<h1 class="my-4">Photos</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Caption</th>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
     <% @photos.each do |photo| %>
-      <tr>
-        <td><%= image_tag photo.image.to_s %></td>
-        <td><%= photo.caption %></td>
-        <td><%= photo.user.name %></td>
-        <td><%= link_to 'Show', photo %></td>
+    <div class="card mb-12">
+       <br>
+        <center><%= image_tag photo.image.to_s %></center>
+       <br>
+        <ul><%= photo.caption %></ul>
+        <ul><%= photo.user.name %></ul>
+        <ul><button type="button" class="btn btn-default"><%= link_to 'Show', photo %></button></ul>
+
         <% if current_user && current_user.id == photo.user.id %>
-          <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
-          <td><%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <ul><button type="button" class="btn btn-default"><%= link_to 'Edit', edit_photo_path(photo) %></button></ul>
+          <ul><button type="button" class="btn btn-default"><%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %></button></ul>
         <% end %>
+
         <% if user_signed_in? %>
           <% if photo.favorited_by?(current_user) %> <!-- ログインしているユーザーがファボしたかどうかで分岐 -->
-            <td><span>お気に入り解除: </span><%=link_to photo.favorites.count, photo_favorites_path(photo.id), method: :delete %></td>
+            <ul><span>お気に入り解除: </span><%=link_to photo.favorites.count, photo_favorites_path(photo.id), method: :delete %></ul>
           <% else %>
-            <td><span>お気に入り登録: </span><%=link_to photo.favorites.count, photo_favorites_path(photo.id), method: :post %></td>
+            <ul><span>お気に入り登録: </span><%=link_to photo.favorites.count, photo_favorites_path(photo.id), method: :post %></ul>
           <% end %>
-        <% else %>
-          <td><span>お気に入り数: </span><%= photo.favorites.count %></td>
         <% end %>
-    <% end %>
-  </tbody>
-</table>
+
+        <ul><span>お気に入り数: </span><%= photo.favorites.count %></ul>
+     <% end %>
+     </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <br>
 

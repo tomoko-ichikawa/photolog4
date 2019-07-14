@@ -11,5 +11,5 @@
   <p><%= image_tag photo.image.to_s %></p>
   <p><span>emai: </span><%= @user.email %></p>
   <p><span>投稿内容: </span><%= link_to photo.caption, photo_path(photo.id) %></p>
-  <p><span>favorite: </span><%= link_to photo.caption, photo_path(photo.id) %></p>
+  <p><span>お気に入り: </span><%= photo.favorites.count %></p>
 <% end %>

@@ -1,28 +1,53 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Photolog3</title>
-    <%= csrf_meta_tags %>
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><h1>Photolog</h1></a>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#gnavi">
+        <span class="sr-only">Photolog</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     </div>
+     </nav>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <header>
+   <div id="gnavi" class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
     <% if user_signed_in? %>
-      <%= link_to "新規投稿", new_photo_path %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      <%= link_to "ユーザー詳細", user_path(current_user.id) %>
-      <%= link_to "ユーザー情報編集", edit_user_registration_path %>
+      <li><%= link_to "新規投稿", new_photo_path %></li>
+      <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+      <li><%= link_to "ユーザー詳細", user_path(current_user.id) %></li>
+      <li><%= link_to "ユーザー情報編集", edit_user_registration_path %></li>
     <% else %>
-      <%= link_to "新規登録", new_user_registration_path %>
-      <%= link_to "ログイン", new_user_session_path %>
+      <li><%= link_to "新規登録", new_user_registration_path %></li>
+      <li><%= link_to "ログイン", new_user_session_path %></li>
     <% end %>
-    <%= link_to "投稿一覧", photos_path %>
-    <%= link_to "ユーザー一覧", users_path %>
+    <li><%= link_to "投稿一覧", photos_path %></li>
+    <li><%= link_to "ユーザー一覧", users_path %></li>
+    </ul>
+   </div>
   </header>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<meta image="viewport" caption="width=device-width">
+
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+<%= csrf_meta_tags %>
+
   <body>
+    <div class="container">
     <%= yield %>
+    </div>
   </body>
 </html>
