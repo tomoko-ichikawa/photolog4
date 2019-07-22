@@ -3,10 +3,8 @@ class RelationshipsController < ApplicationController
   respond_to? :js
 
   def create
-    if user_signed_in?
       @user = User.find(params[:relationship][:followed_id])
       current_user.follow!(@user)
-    end
   end
 
   def destroy
