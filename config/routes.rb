@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'relationships/create'
-
-  get 'relationships/destroy'
-
   root 'photos#index'
   root 'favorites#index'
 
@@ -21,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resource :relationships, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
 
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener"
