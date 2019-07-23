@@ -7,5 +7,15 @@
   <p><span>email: </span><%=link_to user.email, user_path(user.id) %></p>
   <p><span>profile: </span><%= link_to user.profile, user_path(user.id) %></p>
   <p><%= render 'follow_form', user: user %></P>
+
+    <% if user.id != current_user.id %>
+      <li>
+        <div class="item">
+          <%= link_to user.name, user %>
+          <%= link_to 'メッセージ', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %>
+        </div>
+      </li>
+      <li><%= render 'follow_form', user: user %></li> <!-- フォロー機能が実装されて入ればこの一文も必要 -->
+    <% end %>
 <% end %>
 </div>
